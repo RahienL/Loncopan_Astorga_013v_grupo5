@@ -1,0 +1,17 @@
+BookHub\msusuarios\controllers\UsuarioController.class
+BookHub\msusuarios\entities\Usuario.class
+BookHub\msusuarios\MsUsuariosApplication.class
+BookHub\msusuarios\services\UsuarioService.class
+BookHub\msusuarios\repositories\UsuarioRepository.class
+BookHub\msusuarios\security\JwtAuthenticationFilter.class
+BookHub\msusuarios\dto\response\AuthResponse$UserInfo.class
+BookHub\msusuarios\dto\request\UsuarioRequest.class
+BookHub\msusuarios\security\JwtUtils.class
+BookHub\msusuarios\security\CustomUserDetailsService.class
+BookHub\msusuarios\config\SecurityConfig.class
+BookHub\msusuarios\dto\request\AuthRequest.class
+BookHub\msusuarios\controllers\AuthController.class
+BookHub\msusuarios\dto\response\UsuarioResponse.class
+BookHub\msusuarios\dto\request\UpdateUsuarioRequest.class
+BookHub\msusuarios\services\impl\UsuarioServiceImpl.class
+BookHub\msusuarios\dto\response\AuthResponse.class
