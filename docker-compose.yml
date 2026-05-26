@@ -1,0 +1,178 @@
+services:
+  mysql-bookhub:
+    image: mysql:8.0
+    container_name: mysql-bookhub
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_bookhub_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -proot123 --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  ms-catalogo:
+    build:
+      context: ./ms-catalogo
+    container_name: ms-catalogo
+    restart: always
+    depends_on:
+      mysql-bookhub:
+        condition: service_healthy
+    ports:
+      - "8084:8084"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-bookhub:3306/bbdd_catalogo?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root123
+    volumes:
+      - catalogo_uploads:/app/uploads
+
+  ms-envios:
+    build:
+      context: ./ms-envios
+    container_name: ms-envios
+    restart: always
+    depends_on:
+      mysql-bookhub:
+        condition: service_healthy
+    ports:
+      - "8088:8088"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-bookhub:3306/bbdd_envios?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root123
+
+  ms-inventario:
+    build:
+      context: ./ms-inventario
+    container_name: ms-inventario
+    restart: always
+    depends_on:
+      mysql-bookhub:
+        condition: service_healthy
+    ports:
+      - "8086:8086"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-bookhub:3306/bbdd_inventario?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root123
+
+  ms-notificaciones:
+    build:
+      context: ./ms-notificaciones
+    container_name: ms-notificaciones
+    restart: always
+    depends_on:
+      mysql-bookhub:
+        condition: service_healthy
+    ports:
+      - "8087:8087"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-bookhub:3306/bbdd_notificaciones?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root123
+
+  ms-ordenes:
+    build:
+      context: ./ms-ordenes
+    container_name: ms-ordenes
+    restart: always
+    depends_on:
+      mysql-bookhub:
+        condition: service_healthy
+      ms-catalogo:
+        condition: service_started
+    ports:
+      - "8083:8083"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-bookhub:3306/bbdd_ordenes?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root123
+      MS_CATALOGO_URL: http://ms-catalogo:8084
+
+  ms-pagos:
+    build:
+      context: ./ms-pagos
+    container_name: ms-pagos
+    restart: always
+    depends_on:
+      mysql-bookhub:
+        condition: service_healthy
+    ports:
+      - "8085:8085"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-bookhub:3306/bbdd_pagos?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root123
+
+  ms-recomendaciones:
+    build:
+      context: ./ms-recomendaciones
+    container_name: ms-recomendaciones
+    restart: always
+    depends_on:
+      mysql-bookhub:
+        condition: service_healthy
+    ports:
+      - "8092:8092"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-bookhub:3306/bbdd_recomendaciones?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root123
+
+  ms-reportes:
+    build:
+      context: ./ms-reportes
+    container_name: ms-reportes
+    restart: always
+    depends_on:
+      mysql-bookhub:
+        condition: service_healthy
+    ports:
+      - "8091:8091"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-bookhub:3306/bbdd_reportes?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root123
+
+  ms-resenas:
+    build:
+      context: ./ms-resenas
+    container_name: ms-resenas
+    restart: always
+    depends_on:
+      mysql-bookhub:
+        condition: service_healthy
+    ports:
+      - "8089:8089"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-bookhub:3306/bbdd_resenas?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root123
+
+  ms-usuarios:
+    build:
+      context: ./ms-usuarios
+    container_name: ms-usuarios
+    restart: always
+    depends_on:
+      mysql-bookhub:
+        condition: service_healthy
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-bookhub:3306/bbdd_usuarios?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root123
+
+volumes:
+  mysql_bookhub_data:
+  catalogo_uploads:
