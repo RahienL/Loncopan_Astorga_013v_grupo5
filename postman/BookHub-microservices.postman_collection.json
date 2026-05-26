@@ -1,0 +1,273 @@
+{
+  "info": {
+    "name": "BookHub Microservices",
+    "_postman_id": "1f8a9930-f4c8-4c32-9ea4-b8fd12ff70d9",
+    "description": "Coleccion de pruebas para los microservicios BookHub corriendo con Docker Compose.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "ms-catalogo",
+      "item": [
+        {
+          "name": "Listar categorias",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{catalogoUrl}}/api/categorias"
+          }
+        },
+        {
+          "name": "Crear categoria",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Seinen\",\n  \"descripcion\": \"Manga orientado a publico adulto\"\n}"
+            },
+            "url": "{{catalogoUrl}}/api/categorias"
+          }
+        },
+        {
+          "name": "Listar productos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{catalogoUrl}}/api/productos/todos"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ms-usuarios",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@bookhub.local\",\n  \"password\": \"admin123\"\n}"
+            },
+            "url": "{{usuariosUrl}}/api/auth/login"
+          }
+        },
+        {
+          "name": "Perfil usuario por ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{usuariosUrl}}/api/usuarios/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ms-ordenes",
+      "item": [
+        {
+          "name": "Compras por usuario",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{ordenesUrl}}/api/compras/usuario/2"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ms-pagos",
+      "item": [
+        {
+          "name": "Pagos por usuario",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{pagosUrl}}/api/pagos/usuario/2"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ms-envios",
+      "item": [
+        {
+          "name": "Envio por compra",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{enviosUrl}}/api/envios/compra/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ms-inventario",
+      "item": [
+        {
+          "name": "Inventario completo",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{inventarioUrl}}/api/inventario/todos"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ms-notificaciones",
+      "item": [
+        {
+          "name": "Notificaciones pendientes",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{notificacionesUrl}}/api/notificaciones/pendientes"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ms-resenas",
+      "item": [
+        {
+          "name": "Resenas por producto",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{resenasUrl}}/api/resenas/producto/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ms-recomendaciones",
+      "item": [
+        {
+          "name": "Recomendaciones por usuario",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{recomendacionesUrl}}/api/recomendaciones/usuario/2"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ms-reportes",
+      "item": [
+        {
+          "name": "Reportes por usuario",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{reportesUrl}}/api/reportes/usuario/2"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "catalogoUrl",
+      "value": "http://localhost:8084"
+    },
+    {
+      "key": "usuariosUrl",
+      "value": "http://localhost:8081"
+    },
+    {
+      "key": "ordenesUrl",
+      "value": "http://localhost:8083"
+    },
+    {
+      "key": "pagosUrl",
+      "value": "http://localhost:8085"
+    },
+    {
+      "key": "enviosUrl",
+      "value": "http://localhost:8088"
+    },
+    {
+      "key": "inventarioUrl",
+      "value": "http://localhost:8086"
+    },
+    {
+      "key": "notificacionesUrl",
+      "value": "http://localhost:8087"
+    },
+    {
+      "key": "resenasUrl",
+      "value": "http://localhost:8089"
+    },
+    {
+      "key": "recomendacionesUrl",
+      "value": "http://localhost:8092"
+    },
+    {
+      "key": "reportesUrl",
+      "value": "http://localhost:8091"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ]
+}
