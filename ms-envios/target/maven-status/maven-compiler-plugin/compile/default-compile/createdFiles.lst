@@ -1,0 +1,11 @@
+BookHub\msenvios\dto\request\EnvioRequest.class
+BookHub\msenvios\MsEnviosApplication.class
+BookHub\msenvios\repositories\EnvioRepository.class
+BookHub\msenvios\security\JwtAuthenticationFilter.class
+BookHub\msenvios\services\impl\EnvioServiceImpl.class
+BookHub\msenvios\dto\response\EnvioResponse.class
+BookHub\msenvios\entities\Envio.class
+BookHub\msenvios\services\EnvioService.class
+BookHub\msenvios\controllers\EnvioController.class
+BookHub\msenvios\config\SecurityConfig.class
+BookHub\msenvios\security\JwtUtils.class
