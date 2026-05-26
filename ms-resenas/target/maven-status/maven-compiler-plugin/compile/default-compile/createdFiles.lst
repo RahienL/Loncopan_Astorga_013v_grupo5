@@ -1,0 +1,11 @@
+BookHub\msresenas\services\ResenaService.class
+BookHub\msresenas\repositories\ResenaRepository.class
+BookHub\msresenas\MsResenasApplication.class
+BookHub\msresenas\config\SecurityConfig.class
+BookHub\msresenas\controllers\ResenaController.class
+BookHub\msresenas\dto\response\ResenaResponse.class
+BookHub\msresenas\security\JwtUtils.class
+BookHub\msresenas\dto\request\ResenaRequest.class
+BookHub\msresenas\security\JwtAuthenticationFilter.class
+BookHub\msresenas\entities\Resena.class
+BookHub\msresenas\services\impl\ResenaServiceImpl.class
