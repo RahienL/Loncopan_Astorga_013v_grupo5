@@ -1,0 +1,11 @@
+c:\Users\rahie\Downloads\microservices\microservices\ms-inventario\src\main\java\BookHub\msinventario\config\SecurityConfig.java
+c:\Users\rahie\Downloads\microservices\microservices\ms-inventario\src\main\java\BookHub\msinventario\controllers\InventarioController.java
+c:\Users\rahie\Downloads\microservices\microservices\ms-inventario\src\main\java\BookHub\msinventario\dto\request\InventarioRequest.java
+c:\Users\rahie\Downloads\microservices\microservices\ms-inventario\src\main\java\BookHub\msinventario\dto\response\InventarioResponse.java
+c:\Users\rahie\Downloads\microservices\microservices\ms-inventario\src\main\java\BookHub\msinventario\entities\Inventario.java
+c:\Users\rahie\Downloads\microservices\microservices\ms-inventario\src\main\java\BookHub\msinventario\MsInventarioApplication.java
+c:\Users\rahie\Downloads\microservices\microservices\ms-inventario\src\main\java\BookHub\msinventario\repositories\InventarioRepository.java
+c:\Users\rahie\Downloads\microservices\microservices\ms-inventario\src\main\java\BookHub\msinventario\security\JwtAuthenticationFilter.java
+c:\Users\rahie\Downloads\microservices\microservices\ms-inventario\src\main\java\BookHub\msinventario\security\JwtUtils.java
+c:\Users\rahie\Downloads\microservices\microservices\ms-inventario\src\main\java\BookHub\msinventario\services\impl\InventarioServiceImpl.java
+c:\Users\rahie\Downloads\microservices\microservices\ms-inventario\src\main\java\BookHub\msinventario\services\InventarioService.java
