@@ -1,0 +1,11 @@
+c:\Users\rahie\OneDrive\Desktop\microservices\microservices\microservices\ms-recomendaciones\src\main\java\BookHub\msrecomendaciones\config\SecurityConfig.java
+c:\Users\rahie\OneDrive\Desktop\microservices\microservices\microservices\ms-recomendaciones\src\main\java\BookHub\msrecomendaciones\controllers\RecomendacionController.java
+c:\Users\rahie\OneDrive\Desktop\microservices\microservices\microservices\ms-recomendaciones\src\main\java\BookHub\msrecomendaciones\dto\request\RecomendacionRequest.java
+c:\Users\rahie\OneDrive\Desktop\microservices\microservices\microservices\ms-recomendaciones\src\main\java\BookHub\msrecomendaciones\dto\response\RecomendacionResponse.java
+c:\Users\rahie\OneDrive\Desktop\microservices\microservices\microservices\ms-recomendaciones\src\main\java\BookHub\msrecomendaciones\entities\Recomendacion.java
+c:\Users\rahie\OneDrive\Desktop\microservices\microservices\microservices\ms-recomendaciones\src\main\java\BookHub\msrecomendaciones\MsRecomendacionesApplication.java
+c:\Users\rahie\OneDrive\Desktop\microservices\microservices\microservices\ms-recomendaciones\src\main\java\BookHub\msrecomendaciones\repositories\RecomendacionRepository.java
+c:\Users\rahie\OneDrive\Desktop\microservices\microservices\microservices\ms-recomendaciones\src\main\java\BookHub\msrecomendaciones\security\JwtAuthenticationFilter.java
+c:\Users\rahie\OneDrive\Desktop\microservices\microservices\microservices\ms-recomendaciones\src\main\java\BookHub\msrecomendaciones\security\JwtUtils.java
+c:\Users\rahie\OneDrive\Desktop\microservices\microservices\microservices\ms-recomendaciones\src\main\java\BookHub\msrecomendaciones\services\impl\RecomendacionServiceImpl.java
+c:\Users\rahie\OneDrive\Desktop\microservices\microservices\microservices\ms-recomendaciones\src\main\java\BookHub\msrecomendaciones\services\RecomendacionService.java
