@@ -8,7 +8,7 @@ Plataforma de e-commerce de libros construida con arquitectura de microservicios
 
 | Capa | Tecnología |
 |---|---|
-| Lenguaje | Java 21 |
+| Lenguaje | Java 25 |
 | Framework | Spring Boot 3.5.6 |
 | Seguridad | Spring Security + JWT (stateless) |
 | Persistencia | Spring Data JPA / Hibernate |
