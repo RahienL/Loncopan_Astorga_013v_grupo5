@@ -1,12 +1,13 @@
 package BookHub.msinventario.services.impl;
 
-import BookHub.msinventario.entities.Inventario;
-import BookHub.msinventario.repositories.InventarioRepository;
-import BookHub.msinventario.services.InventarioService;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import BookHub.msinventario.entities.Inventario;
+import BookHub.msinventario.repositories.InventarioRepository;
+import BookHub.msinventario.services.InventarioService;
 
 @Service
 public class InventarioServiceImpl implements InventarioService {
@@ -106,6 +107,9 @@ public class InventarioServiceImpl implements InventarioService {
     @Override
     @Transactional
     public boolean verificarYDescontarStock(Long productoId, Integer cantidad) {
+        if (productoId == null || productoId <= 0 || cantidad == null || cantidad <= 0) {
+            return false;
+        }
         Inventario inventario = inventarioRepository.findByProductoId(productoId).orElse(null);
         if (inventario == null || !inventario.getActivo() || inventario.getStock() < cantidad) {
             return false;

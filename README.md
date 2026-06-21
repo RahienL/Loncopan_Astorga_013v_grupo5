@@ -228,6 +228,26 @@ Cada microservicio expone su propia documentación OpenAPI. Una vez levantados:
 | ms-reportes | http://localhost:8091/swagger-ui/index.html |
 | ms-recomendaciones | http://localhost:8092/swagger-ui/index.html |
 
+Endpoints OpenAPI (JSON):
+
+| Servicio | OpenAPI JSON |
+|---|---|
+| ms-usuarios | http://localhost:8081/v3/api-docs |
+| ms-ordenes | http://localhost:8083/v3/api-docs |
+| ms-catalogo | http://localhost:8084/v3/api-docs |
+| ms-pagos | http://localhost:8085/v3/api-docs |
+| ms-inventario | http://localhost:8086/v3/api-docs |
+| ms-notificaciones | http://localhost:8087/v3/api-docs |
+| ms-envios | http://localhost:8088/v3/api-docs |
+| ms-resenas | http://localhost:8089/v3/api-docs |
+| ms-reportes | http://localhost:8091/v3/api-docs |
+| ms-recomendaciones | http://localhost:8092/v3/api-docs |
+
+Para endpoints protegidos por JWT:
+1. Inicia sesión en ms-usuarios y obtén el token.
+2. Abre Swagger UI del microservicio.
+3. Presiona Authorize e ingresa: Bearer TU_TOKEN.
+
 ---
 
 ## Colección Postman

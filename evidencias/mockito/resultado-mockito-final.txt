@@ -1,0 +1,70 @@
+REPORTE DE PRUEBAS MOCKITO
+Fecha: 2026-06-20 21:05:00
+
+Proceso y resultado por servicio:
+- Servicio: ms-usuarios
+  Proceso: Validar flujo de usuario con Mockito
+  Test: UsuarioServiceMockitoTest
+  Resultado: OK (NO FALLO)
+  ExitCode: 0
+
+- Servicio: ms-catalogo
+  Proceso: Validar flujo de producto con Mockito
+  Test: ProductoServiceMockitoTest
+  Resultado: OK (NO FALLO)
+  ExitCode: 0
+
+- Servicio: ms-ordenes
+  Proceso: Validar flujo de compra/carrito con Mockito
+  Test: CompraServiceMockitoTest
+  Resultado: OK (NO FALLO)
+  ExitCode: 0
+
+- Servicio: ms-inventario
+  Proceso: Validar flujo de inventario con Mockito
+  Test: InventarioServiceMockitoTest
+  Resultado: OK (NO FALLO)
+  ExitCode: 0
+
+- Servicio: ms-pagos
+  Proceso: Validar flujo de pagos con Mockito
+  Test: PagoServiceMockitoTest
+  Resultado: OK (NO FALLO)
+  ExitCode: 0
+
+- Servicio: ms-notificaciones
+  Proceso: Validar flujo de notificaciones con Mockito
+  Test: NotificacionServiceMockitoTest
+  Resultado: OK (NO FALLO)
+  ExitCode: 0
+
+- Servicio: ms-envios
+  Proceso: Validar flujo de envios con Mockito
+  Test: EnvioServiceMockitoTest
+  Resultado: OK (NO FALLO)
+  ExitCode: 0
+
+- Servicio: ms-resenas
+  Proceso: Validar flujo de reseñas con Mockito
+  Test: ResenaServiceMockitoTest
+  Resultado: OK (NO FALLO)
+  ExitCode: 0
+
+- Servicio: ms-recomendaciones
+  Proceso: Validar flujo de recomendaciones con Mockito
+  Test: RecomendacionServiceMockitoTest
+  Resultado: OK (NO FALLO)
+  ExitCode: 0
+
+- Servicio: ms-reportes
+  Proceso: Validar flujo de reportes con Mockito
+  Test: ReporteServiceMockitoTest
+  Resultado: OK (NO FALLO)
+  ExitCode: 0
+
+Resultado Global: OK (todo el proceso paso sin fallos)
+
+Resumen:
+- Servicios validados: 10/10
+- Servicios con fallos: 0/10
+- Estado final: COMPLETADO

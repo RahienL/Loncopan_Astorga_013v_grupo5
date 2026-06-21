@@ -1,6 +1,19 @@
 package BookHub.msordenes.services.impl;
 
-import BookHub.msordenes.services.CompraService;
+import java.io.ByteArrayOutputStream;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
+
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
@@ -11,22 +24,15 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import BookHub.msordenes.dto.request.CompraTemporalRequest;
-import BookHub.msordenes.entities.*;
-import BookHub.msordenes.repositories.*;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.RestTemplate;
 
-import java.io.ByteArrayOutputStream;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import BookHub.msordenes.dto.request.CompraTemporalRequest;
+import BookHub.msordenes.entities.Compra;
+import BookHub.msordenes.entities.CompraTemporal;
+import BookHub.msordenes.entities.DetalleCompra;
+import BookHub.msordenes.entities.DetalleCompraTemporal;
+import BookHub.msordenes.repositories.CompraRepository;
+import BookHub.msordenes.repositories.CompraTemporalRepository;
+import BookHub.msordenes.services.CompraService;
 
 @Service
 public class CompraServiceImpl implements CompraService {
@@ -49,6 +55,10 @@ public class CompraServiceImpl implements CompraService {
     @Override
     @Transactional
     public CompraTemporal crearCompratemporal(CompraTemporalRequest request) {
+        if (request.usuarioId() == null) {
+            throw new RuntimeException("Usuario inválido para crear carrito");
+        }
+
         CompraTemporal ct = new CompraTemporal();
         ct.setUsuarioId(request.usuarioId());
         ct.setUsuarioNombre(request.usuarioNombre() != null ? request.usuarioNombre() : "");
@@ -76,7 +86,11 @@ public class CompraServiceImpl implements CompraService {
     public CompraTemporal agregarItemAlCarrito(Long compraTemporalId, CompraTemporalRequest.ItemRequest item) {
         CompraTemporal ct = compraTemporalRepository.findById(compraTemporalId)
                 .orElseThrow(() -> new RuntimeException("Carrito no encontrado: " + compraTemporalId));
-        ct.getDetalles().add(buildDetalleTemporal(ct, item));
+        if (!"activo".equals(ct.getEstado())) {
+            throw new RuntimeException("Solo se puede modificar un carrito activo");
+        }
+        DetalleCompraTemporal detalle = buildDetalleTemporal(ct, item);
+        ct.getDetalles().add(detalle);
         ct.setTotal(calcularTotal(ct.getDetalles()));
         return compraTemporalRepository.save(ct);
     }
@@ -86,7 +100,9 @@ public class CompraServiceImpl implements CompraService {
     public CompraTemporal eliminarItemDelCarrito(Long compraTemporalId, Long detalleId) {
         CompraTemporal ct = compraTemporalRepository.findById(compraTemporalId)
                 .orElseThrow(() -> new RuntimeException("Carrito no encontrado: " + compraTemporalId));
-        ct.getDetalles().removeIf(d -> d.getId().equals(detalleId));
+        if (!ct.getDetalles().removeIf(d -> d.getId().equals(detalleId))) {
+            throw new RuntimeException("Item no encontrado en el carrito: " + detalleId);
+        }
         ct.setTotal(calcularTotal(ct.getDetalles()));
         return compraTemporalRepository.save(ct);
     }
@@ -99,11 +115,20 @@ public class CompraServiceImpl implements CompraService {
                 .orElseThrow(() -> new RuntimeException("Carrito no encontrado: " + compraTemporalId));
 
         if (!"activo".equals(ct.getEstado())) {
-            throw new RuntimeException("El carrito ya fue procesado o expiró");
+            throw new RuntimeException("El carrito ya fue procesado o expirado");
+        }
+        if (usuarioId == null || usuarioId <= 0) {
+            throw new RuntimeException("Usuario inválido para confirmar la compra");
+        }
+        if (ct.getDetalles() == null || ct.getDetalles().isEmpty()) {
+            throw new RuntimeException("No se puede confirmar una compra con el carrito vacío");
         }
 
         // Verificar y descontar stock en ms-catalogo para cada ítem
         for (DetalleCompraTemporal d : ct.getDetalles()) {
+            if (d.getCantidad() == null || d.getCantidad() <= 0) {
+                throw new RuntimeException("La cantidad del producto " + d.getProductoNombre() + " debe ser mayor a cero");
+            }
             Map<String, Integer> body = Map.of("cantidad", d.getCantidad());
             String url = msCatalogoUrl + "/api/productos/" + d.getProductoId() + "/descontar-stock";
             try {
@@ -221,6 +246,19 @@ public class CompraServiceImpl implements CompraService {
 
     // Helpers
     private DetalleCompraTemporal buildDetalleTemporal(CompraTemporal ct, CompraTemporalRequest.ItemRequest item) {
+        if (item == null) {
+            throw new RuntimeException("Item inválido");
+        }
+        if (item.productoId() == null || item.productoId() <= 0) {
+            throw new RuntimeException("Producto inválido en el carrito");
+        }
+        if (item.cantidad() == null || item.cantidad() <= 0) {
+            throw new RuntimeException("La cantidad del producto debe ser mayor a cero");
+        }
+        if (item.precioUnitario() == null || item.precioUnitario().compareTo(java.math.BigDecimal.ZERO) <= 0) {
+            throw new RuntimeException("El precio unitario debe ser mayor a cero");
+        }
+
         DetalleCompraTemporal d = new DetalleCompraTemporal();
         d.setCompraTemporal(ct);
         d.setProductoId(item.productoId());

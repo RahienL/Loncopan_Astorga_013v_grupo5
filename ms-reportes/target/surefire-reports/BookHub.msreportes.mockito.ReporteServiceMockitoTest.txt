@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: BookHub.msreportes.mockito.ReporteServiceMockitoTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.901 s -- in BookHub.msreportes.mockito.ReporteServiceMockitoTest

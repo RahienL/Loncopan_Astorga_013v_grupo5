@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: BookHub.msrecomendaciones.mockito.RecomendacionServiceMockitoTest
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.894 s -- in BookHub.msrecomendaciones.mockito.RecomendacionServiceMockitoTest

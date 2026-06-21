@@ -1,0 +1,13 @@
+﻿ms-usuarios | OK | ExitCode: 0
+ms-catalogo | OK | ExitCode: 0
+ms-ordenes | OK | ExitCode: 0
+ms-inventario | OK | ExitCode: 0
+ms-pagos | OK | ExitCode: 0
+ms-notificaciones | OK | ExitCode: 0
+ms-envios | OK | ExitCode: 0
+ms-resenas | OK | ExitCode: 0
+ms-recomendaciones | OK | ExitCode: 0
+ms-reportes | OK | ExitCode: 0
+
+RESUMEN: 10 OK - 0 FALLO
+ESTADO GLOBAL: OK - TODO PASO SIN FALLOS

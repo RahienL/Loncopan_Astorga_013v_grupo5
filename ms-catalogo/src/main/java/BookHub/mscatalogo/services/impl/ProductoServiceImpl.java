@@ -1,16 +1,20 @@
 package BookHub.mscatalogo.services.impl;
 
-import BookHub.mscatalogo.entities.Producto;
-import BookHub.mscatalogo.repositories.ProductoRepository;
-import BookHub.mscatalogo.services.ProductoService;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.time.LocalDateTime;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.nio.file.*;
-import java.time.LocalDateTime;
-import java.util.List;
+import BookHub.mscatalogo.entities.Producto;
+import BookHub.mscatalogo.repositories.ProductoRepository;
+import BookHub.mscatalogo.services.ProductoService;
 
 @Service
 public class ProductoServiceImpl implements ProductoService {
@@ -110,6 +114,9 @@ public class ProductoServiceImpl implements ProductoService {
     @Override
     @Transactional
     public boolean verificarYDescontarStock(Long productoId, Integer cantidad) {
+        if (productoId == null || productoId <= 0 || cantidad == null || cantidad <= 0) {
+            return false;
+        }
         Producto producto = productoRepository.findById(productoId).orElse(null);
         if (producto == null || producto.getStock() < cantidad) {
             return false;

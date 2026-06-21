@@ -21,6 +21,7 @@ import BookHub.msordenes.dto.response.CompraDto;
 import BookHub.msordenes.dto.response.CompraResponse;
 import BookHub.msordenes.dto.response.CompraTemporalDto;
 import BookHub.msordenes.services.CompraService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/compras")
@@ -34,7 +35,7 @@ public class CompraController {
 
     /** Crear o iniciar un carrito temporal */
     @PostMapping("/temporal")
-    public ResponseEntity<CompraTemporalDto> crearCarrito(@RequestBody CompraTemporalRequest request) {
+    public ResponseEntity<CompraTemporalDto> crearCarrito(@Valid @RequestBody CompraTemporalRequest request) {
         return ResponseEntity.ok(CompraTemporalDto.from(compraService.crearCompratemporal(request)));
     }
 
@@ -49,7 +50,7 @@ public class CompraController {
     /** Agregar un ítem al carrito */
     @PostMapping("/temporal/{carritoId}/items")
     public ResponseEntity<CompraTemporalDto> agregarItem(@PathVariable Long carritoId,
-                                                          @RequestBody CompraTemporalRequest.ItemRequest item) {
+                                                          @Valid @RequestBody CompraTemporalRequest.ItemRequest item) {
         return ResponseEntity.ok(CompraTemporalDto.from(compraService.agregarItemAlCarrito(carritoId, item)));
     }
 
