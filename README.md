@@ -15,6 +15,7 @@ Plataforma de e-commerce de libros construida con arquitectura de microservicios
 | Base de datos | MySQL 8.0 |
 | Contenedores | Docker & Docker Compose |
 | Build | Maven (Maven Wrapper incluido) |
+| Testing | JUnit 5 + Mockito |
 | Documentación API | Springdoc OpenAPI / Swagger UI |
 | Generación de PDFs | iText |
 
@@ -247,6 +248,39 @@ Para endpoints protegidos por JWT:
 1. Inicia sesión en ms-usuarios y obtén el token.
 2. Abre Swagger UI del microservicio.
 3. Presiona Authorize e ingresa: Bearer TU_TOKEN.
+
+---
+
+## Pruebas con Mockito
+
+El proyecto incluye pruebas unitarias por microservicio usando **JUnit 5 + Mockito** para validar la lógica de servicios y repositorios mockeados.
+
+### Ejecución consolidada
+
+Desde la raíz del proyecto puedes ejecutar todas las pruebas con:
+
+```powershell
+.\run_all_tests.ps1
+```
+
+Este script:
+1. Ejecuta `mvn test` por cada microservicio en un contenedor Maven.
+2. Muestra un resumen consolidado de servicios OK/FALLO.
+3. Guarda el resultado en `evidencias/mockito/resultado-final.txt`.
+
+### Evidencias
+
+En `evidencias/mockito/` se incluyen reportes consolidados y archivos de respaldo de la ejecución de pruebas.
+
+### Estado actual
+
+- Última ejecución consolidada: **10 OK - 0 FALLO**.
+- Estado global: **OK - TODO PASÓ SIN FALLOS**.
+- Archivo de resumen: `evidencias/mockito/resultado-final.txt`.
+
+### Alcance de pruebas
+
+Cada microservicio posee pruebas Mockito en `src/test/java/.../mockito/` para cubrir la lógica principal de negocio.
 
 ---
 
